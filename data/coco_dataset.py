@@ -66,9 +66,9 @@ class CocoDataset(data.Dataset):
 
             # convert caption to tensor
             tokens = nltk.tokenize.word_tokenize(str(caption).lower())
-            caption = [self.vocab(self.vocab.start_word)]
+            caption = [self.vocab(self.vocab.startWord)]
             caption.extend([self.vocab(tk) for tk in tokens])
-            caption.append(self.vocab(self.vocab.end_word))
+            caption.append(self.vocab(self.vocab.endWord))
             caption = torch.Tensor(caption).long()
 
             # return pre-processed image and caption tensors
