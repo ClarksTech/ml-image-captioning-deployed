@@ -82,7 +82,21 @@ class CocoDataset(data.Dataset):
 
             # return pre-processed image and original image
             return originalImage, image
+        
+    def getTrainIndicies(self):
+        """Return indicies of training set"""
+        # choose caption length from vocab
+        selectionLength = np.random.choice(self.captionLengths)
+        # find indicies of captions with this length
+        indicies = np.where([self.captionLengths[x] == selectionLength
+                             for x in np.arange(len(self.captionLengths))])[0]
+        # only return batch size
+        indicies = list(np.random.choice(indicies, size=self.batchSize))
+        return indicies
 
-    def __len__():
+    def __len__(self):
         """The total number of samples"""
-        #TODO:
+        if self.mode == "train":
+            return len(self.ids)
+        else:
+            return len(self.paths)
