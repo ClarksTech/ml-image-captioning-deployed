@@ -7,6 +7,9 @@ from pycocotools.coco import COCO
 import nltk
 import numpy as np
 from tqdm import tqdm
+from PIL import Image
+import os
+import torch
 
 class CocoDataset(data.Dataset):
     """Efficient data generation utility to allow the COCO dataset to be read in along with captions"""
@@ -48,10 +51,38 @@ class CocoDataset(data.Dataset):
             testInformation = json.loads(open(annotationsFile).read())
             self.paths = [testItm["file_name"] for testItm in testInformation["images"]]
     
-    def __getitem__():
+    def __getitem__(self, index):
         """Generate samples from the data"""
-        #TODO:
-    
+        # training specific image and caption return
+        if self.mode == "train":
+            annotationId = self.ids[index]
+            caption = self.coco.anns[annotationId]["caption"]
+            imageId = self.coco.anns[annotationId]["image_id"]
+            path = self.coco.loadImgs(imageId)[0]["file_name"]
+
+            # convert the image to a tensor and perform image pre-processing
+            image = Image.open(os.path.join(self.imagesFolder, path)).convert("RGB")
+            image = self.transform(image)
+
+            # convert caption to tensor
+            tokens = nltk.tokenize.word_tokenize(str(caption).lower())
+            caption = [self.vocab(self.vocab.start_word)]
+            caption.extend([self.vocab(tk) for tk in tokens])
+            caption.append(self.vocab(self.vocab.end_word))
+            caption = torch.Tensor(caption).long()
+
+            # return pre-processed image and caption tensors
+            return image, caption
+        
+        # test specific image return
+        else:
+            image = Image.open(os.path.join(self.imagesFolder, path)).conver("RGB")
+            originalImage = np.array(image)
+            image = self.transform(image)
+
+            # return pre-processed image and original image
+            return originalImage, image
+
     def __len__():
         """The total number of samples"""
         #TODO:
