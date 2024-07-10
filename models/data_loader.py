@@ -9,7 +9,7 @@ class CocoDataLoader:
     def __init__(
         self,
         mode = "train",                 # dataset mode may be either test or train
-        vocabFile = "vocabulary.pkl",   # saved vocabulary
+        vocabFile = "../data/vocabulary.pkl",   # saved vocabulary
         vocabFileExists = True,         # flag for if vocab file already exists
         numWorkers = 0,                 # number of subprocesses to use for data loading
     ):
