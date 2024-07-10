@@ -16,7 +16,7 @@ class Vocabulary(object):
             startWord = "<start>",                                      # magic start word
             endWord = "<end>",                                          # magic end word
             unkWord = "<unk>",                                          # unknown word not in the dataset
-            annotationFile = "data/annotations/captions_val2017.json",  # COCO dataset captions file
+            annotationFile = "data/annotations/captions_train2017.json",# COCO dataset captions file
             vocabFileExists = False,                                    # flag for if vocab file already exists
     ):
         self.vocabThreshold = vocabThreshold

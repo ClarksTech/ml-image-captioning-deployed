@@ -20,7 +20,7 @@ class CocoDataset(data.Dataset):
             batchSize,          # size of training batch to select
             imagesFolder,       # path to images folder
             annotationsFile,    # path to coco annotations json
-            vocab,              # instance of dataset vocab class (dependancy injection)
+            vocab,              # dependancy injection of the vocab class instance
     ):
         """Initialise the dataset class"""
         self.transform = transform
@@ -40,7 +40,7 @@ class CocoDataset(data.Dataset):
             captionsTokenized = [nltk.tokenize.word_tokenize(
                 str(self.coco.anns[self.ids[index]]["caption"]).lower()
             )
-            for index in tqdm(np.arrange(len(self.ids)))
+            for index in tqdm(np.arange(len(self.ids)))
             ]
 
             # get caption lengths
