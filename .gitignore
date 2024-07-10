@@ -1,6 +1,8 @@
 # Data Files
 data/annotations/
 data/images/
+cocoapi/annotations_ZIPs
+cocoapi/images_ZIPs
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
