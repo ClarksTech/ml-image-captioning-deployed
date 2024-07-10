@@ -48,6 +48,7 @@ class CocoDataset(data.Dataset):
         
         # test specific initialisation
         else:
+            assert self.batchSize == 1, "Please change batch_size to 1 if testing the model."
             testInformation = json.loads(open(annotationsFile).read())
             self.paths = [testItm["file_name"] for testItm in testInformation["images"]]
     

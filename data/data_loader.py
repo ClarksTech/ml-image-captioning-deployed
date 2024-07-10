@@ -2,9 +2,7 @@
 
 # Imports
 import torch.utils.data as data
-from coco_dataset import CocoDataset
 import os
-from coco_dataset_vocab import Vocabulary
 
 class CocoDataLoader:
     """Class to create data loader for the COCO dataset"""
@@ -32,7 +30,6 @@ class CocoDataLoader:
             imagesFolder = "images/train2017"
             annotationsFile = "annotations/captions_train2017.json"
         elif mode == "test":
-            assert self.batchSize == 1, "Please change batch_size to 1 if testing the model."
             assert os.path.exists(self.vocabFile), "Must first generate vocab.pkl from training data."
             assert self.vocabFileExists, "Change vocabFileExists to True."
             imagesFolder = "images/test2017"

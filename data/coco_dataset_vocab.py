@@ -6,6 +6,7 @@ import pickle
 from pycocotools.coco import COCO
 from collections import Counter
 import nltk
+nltk.download("punkt")
 
 class Vocabulary(object):
     """Class to generate and store COCO dataset Vocabulary"""
